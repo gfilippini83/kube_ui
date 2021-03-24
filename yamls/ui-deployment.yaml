@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-ui
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-ui
+  template:
+    metadata:
+      labels:
+        app: app-ui
+    spec:
+      containers:
+      - name: app-ui
+        image: 'us.gcr.io/singular-elixir-308623/ui:v5'
