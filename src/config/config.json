@@ -1,0 +1,11 @@
+{
+    "prod": {
+        "apiUrl" : "http://10.8.6.150:3000"
+    },
+    "dev": {
+        "apiUrl" : "http://10.8.6.150:3000"
+    },
+    "local": {
+        "apiUrl" : "http://localhost:3000"
+    }
+}
