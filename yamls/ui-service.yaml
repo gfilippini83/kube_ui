@@ -4,7 +4,7 @@ metadata:
   name: app-ui
   namespace: app
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: app-ui
   ports:

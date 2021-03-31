@@ -10,4 +10,4 @@ RUN npm install
 RUN npm install -g @angular/cli
 COPY . /app
 EXPOSE 4000
-CMD npm run serve:ssr
+CMD npm run ssr:prod

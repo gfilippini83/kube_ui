@@ -15,4 +15,4 @@ spec:
     spec:
       containers:
       - name: app-ui
-        image: 'us.gcr.io/singular-elixir-308623/ui:v5'
+        image: 'us.gcr.io/adroit-lantern-308821/ui:v1'

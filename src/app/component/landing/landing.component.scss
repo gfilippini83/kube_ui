@@ -1,0 +1,52 @@
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+.container-fluid {
+        background-color: rgb(139, 139, 139);
+}
+// Small devices (landscape phones, 576px and up)
+.mat-grid-list{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.mat-card-image {
+    margin: 0;
+    height: 230px;
+    width: 230px;
+  }
+
+.content-footer {
+    position:absolute;
+    bottom:0;
+    // margin-bottom:0px ;
+}
+.content-title {
+    font-weight: 900;
+    text-align: center;
+}
+
+// @media (min-width: 576px) { 
+//     .container-fluid {
+//         background-color: orange;
+//     }
+//  }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { 
+//     .container-fluid {
+//         background-color: red;
+//     }
+// }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { 
+//     .container-fluid {
+//         background-color: blue;
+//     }
+// }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { 
+//     .container-fluid {
+//         background-color: green;
+//     }
+// }

@@ -1,0 +1,34 @@
+<button [routerLink]="['/']" mdbBtn type="button" color="success" outline="true" rounded="true" mdbWavesEffect>Back to Home</button>
+<div class="container">
+    <!-- Jumbotron -->
+<div class="jumbotron text-center" style="max-width: 1400px;">
+
+    <!-- Title -->
+    <h2 class="card-title h4 pb-2"><strong>{{config.title}}</strong></h2>
+  
+    <!-- Card image -->
+    <div class="view overlay my-4 waves-light" mdbWavesEffect>
+      <img [src]="config.coverPhoto" class="img-fluid" alt="">
+      <a>
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+  
+    <h5 class="indigo-text h5 mb-4">Written By: {{config.author}}</h5>
+    <div *ngFor="let content of config.content">
+        <div class="container" *ngIf="content.type === 'image'">
+            <img class="img-fluid" [src]="content.content">
+        </div>
+        <a *ngIf="content.type === 'link'" [href]="content.content">{{content.content}}</a>
+        <h4 *ngIf="content.type === 'text'">{{content.content}}</h4>
+    </div>
+    <!-- <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p> -->
+  
+    <!-- In the future it will be store in the db for the author, so their social can be shared -->
+    <a class="fa-lg p-2 m-2 li-ic"><mdb-icon fab icon="linkedin-in" class="grey-text"></mdb-icon></a>\
+    <a class="fa-lg p-2 m-2 tw-ic"><mdb-icon fab icon="twitter" class="grey-text"></mdb-icon></a>\
+    <a class="fa-lg p-2 m-2 fb-ic"><mdb-icon fab icon="facebook-f" class="grey-text"></mdb-icon></a>
+  
+  </div>
+  <!-- Jumbotron -->
+</div>
