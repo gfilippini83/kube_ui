@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticleViewerComponent } from './component/article-viewer/article-viewer.component';
+import { CreateComponent } from './component/create/create.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { LandingComponent } from './component/landing/landing.component';
 import { LoginComponent } from './component/login/login.component';
@@ -25,6 +26,9 @@ const routes: Routes = [
   },
   {
     path: 'signin', component: LoginComponent, pathMatch: 'full'
+  },
+  {
+    path: 'create', component: CreateComponent, pathMatch: 'full' 
   }
 ];
 

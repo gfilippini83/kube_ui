@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Login {{data.status}}</h1>
+<!-- {{data.status}} -->
+<div mat-dialog-content>
+  <h2 *ngIf="data.status==='SUCCESS'"> Your account has been successfully created: {{data.message}}</h2>
+  <h2 *ngIf="data.status==='FAILURE'"> There has been an error when trying to register you account: {{data.message}}</h2>
+</div>

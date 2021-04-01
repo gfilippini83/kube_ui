@@ -25,10 +25,32 @@
     <!-- <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p> -->
   
     <!-- In the future it will be store in the db for the author, so their social can be shared -->
-    <a class="fa-lg p-2 m-2 li-ic"><mdb-icon fab icon="linkedin-in" class="grey-text"></mdb-icon></a>\
-    <a class="fa-lg p-2 m-2 tw-ic"><mdb-icon fab icon="twitter" class="grey-text"></mdb-icon></a>\
+    <a class="fa-lg p-2 m-2 li-ic"><mdb-icon fab icon="linkedin-in" class="grey-text"></mdb-icon></a>
+    <a class="fa-lg p-2 m-2 tw-ic"><mdb-icon fab icon="twitter" class="grey-text"></mdb-icon></a>
     <a class="fa-lg p-2 m-2 fb-ic"><mdb-icon fab icon="facebook-f" class="grey-text"></mdb-icon></a>
   
   </div>
   <!-- Jumbotron -->
+
+  <div class="jumbotron text-center" style="max-width: 1400px;">
+    <div class="container">
+      <textarea matInput matInput [(ngModel)]="comment"></textarea>
+      <button id="postButton"type="button" class="btn btn-outline-dark" (click)="postComment()" data-mdb-ripple-color="dark">
+        Post Comment
+      </button>
+      <br>
+      <div *ngFor="let comment of comments">
+      <mat-card>
+          <mat-card-content>
+            <p>
+              {{comment.comment}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a [href]="comment.link" style="text-decoration: none; color: black">{{comment.commenter}} || {{convertDate(comment.datetime)}}</a>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </div>

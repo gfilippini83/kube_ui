@@ -20,7 +20,6 @@ export interface Tile {
 })
 export class LandingComponent implements OnInit {
   hotArticles: boolean = true;
-  data: ArticleData[] = [];
   breakpoint: number = 3;
   jumbo: JumboData = {
     title: '',
@@ -31,9 +30,18 @@ export class LandingComponent implements OnInit {
       _id: '',
       title: '',
       author: '',
-      date: '',
+      date: 0,
       coverPhoto: '',
       footer: '',
+      rating: 0,
+      comments: [
+          {
+              comment: '',
+              datetime: 0,
+              commenter: '',
+              link: ''
+          }
+      ],
       content: [
         {
           type: '',
@@ -50,6 +58,7 @@ export class LandingComponent implements OnInit {
     // {text: 'six', cols: 3, rows: 1, color: 'lightpink'},
     // {text: 'seven', cols: 3, rows: 1, color: '#DDBDF1'}
   ];
+  articles: ArticleData[] = [];
   constructor(private menuService: MenuService) { }
 
   ngOnInit(): void {
@@ -57,20 +66,20 @@ export class LandingComponent implements OnInit {
       this.jumbo = <JumboData> resp.config.textElements;
       this.menuService.getArticles().subscribe(resp => {
         if(resp) {
-          this.data = resp
-          for (var i = 0; i < resp.length; i++){
+          this.articles = resp.map(x => x);
+          this.articles.reverse()
+          for (var i = 0; i < this.articles.length; i++){
             if( i == 0 ) {
-              this.firstTile.data = resp[i]
+              this.firstTile.data = this.articles[i]
             } else {
               this.tiles.push(<Tile> {
-                data: resp[i],
+                data: this.articles[i],
                 cols: 3,
                 rows: 1,
                 color: 'lightpink'
               })
             }
           }
-          console.log("DATA", this.data)
           this.onResize();
         }
       })
@@ -80,6 +89,10 @@ export class LandingComponent implements OnInit {
 
   shorten(bio:String){
     return bio.length <= 100 ? bio : bio.slice(0,96) + '...';
+  }
+  
+  convertDate(date: number) {
+    return new Date(date);
   }
   // @ts-ignore
   onResize(): void {

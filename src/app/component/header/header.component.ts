@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
     username: '',
     email: '',
     roles: [{
+      _id: '',
       role: ''
     }],
     accessToken: ''
@@ -49,7 +50,7 @@ export class HeaderComponent implements OnInit {
         this.lock = false;
         if(resp) {
           this.user = resp;
-          console.log("IS LOGGED:", this.isLoggedIn, "USER DATA:", this.user)
+          this.menuService.setUser(this.user);
         }
       });
     }
@@ -59,8 +60,21 @@ export class HeaderComponent implements OnInit {
     this.getUser();
     return this.isLoggedIn
   }
+  isBlogger(): boolean {
+    return this.menuService.isBlogger();
+  }
   logout(): void {
     this.authService.logout();
+    this.menuService.setUser({
+      id: '',
+      username: '',
+      email: '',
+      roles: [{
+        _id: '',
+        role: ''
+      }],
+      accessToken: ''
+    })
   }
 
 }

@@ -1,0 +1,73 @@
+<div class="jumbotron text-center" style="max-width: 1400px;">
+
+    <form [formGroup]="blogForm">
+
+        <div class="form-group">
+            <label for="title">Title of Blog</label>
+            <input type="text" formControlName="title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="coverPhoto">Cover Photo URL</label>
+            <input type="text" formControlName="coverPhoto" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="footer">Footer</label>
+            <input type="footer" formControlName="footer" class="form-control" />
+        </div>
+        <div formArrayName="content">
+            <div *ngFor="let stuff of getContent.controls;  let i=index" style="padding: top 30px;">
+                <mat-card >
+                    <div [formGroup]="getContent.controls[i]">
+                        <div class="form-group">
+                            <label for="type">Type of Content</label>
+                            <button type="button" class="btn btn-outline-danger" style="display: inline;" data-mdb-ripple-color="dark" (click)="delInput(i)">
+                                -
+                            </button>
+                            <select formControlName="type" class="form-control">
+                                <option value="image">Image</option>
+                                <option value="video">Video</option>
+                                <option value="link">Link</option>
+                                <option value="text">Text</option>
+                            </select>
+                        </div>
+                        <div class="form-group" *ngIf="getType(i) === 'image'">
+                            <div class="form-group">
+                                <label for="content">Image URL</label>
+                                <input type="content" formControlName="content" class="form-control" />
+                            </div>
+                        </div>  
+                        <div class="form-group" *ngIf="getType(i) === 'text'">
+                            <label for="content">Text Content</label>
+                            <textarea type="content" formControlName="content" class="form-control"></textarea>
+                        </div>  
+                        <div class="form-group" *ngIf="getType(i) === 'link'">
+                            <div class="form-group">
+                                <label for="content">Link URL</label>
+                                <input type="content" formControlName="content" class="form-control" />
+                            </div>
+                        </div>  
+                        <div class="form-group" *ngIf="getType(i) === 'video'">
+                            <div class="form-group">
+                                <label for="content">Video URL</label>
+                                <input type="content" formControlName="content" class="form-control" />
+                            </div>
+                        </div>  
+                    </div>
+                </mat-card>
+            </div>
+            <h3>Add Content</h3>
+            <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="addInput()">
+                +
+            </button>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary" (click)="onSubmit()">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Post Blog
+            </button>
+        </div>
+      </form>
+</div>

@@ -22,7 +22,13 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SignInDialog } from './component/dialog/signInDialog/signInDialog.component';
+import { RegisterMessageDialog } from './component/dialog/registerDialog/register.component';
+import { LoginDialog } from './component/dialog/loginDialog/login.component';
+import { CreateComponent } from './component/create/create.component';
+import { newBlogDialog } from './component/dialog/newBlogDialog/newBlog.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +38,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     DashboardComponent,
     TestComponent,
     ArticleViewerComponent,
+    RegisterMessageDialog,
+    LoginDialog,
     LoginComponent,
+    newBlogDialog,
     RegisterComponent,
-    UserProfileComponent
+    SignInDialog,
+    UserProfileComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -42,6 +53,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatDialogModule,
     // MatIconModule,
     // MatToolbarModule,
     // MatButtonModule,

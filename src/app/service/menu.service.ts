@@ -4,8 +4,10 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import * as e from 'express';
 import { Observable } from 'rxjs';
 import { ArticleData } from '../interfaces/articleData';
+import { CommentData } from '../interfaces/comment';
+import { Message } from '../interfaces/message';
 import { PageData } from '../interfaces/pageData';
-import { TestData } from '../interfaces/test';
+import { UserData } from '../interfaces/userData';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +15,21 @@ import { TestData } from '../interfaces/test';
 export class MenuService {
   
   testBrowser: boolean;
+  userData: UserData  = {
+    id: '',
+    username: '',
+    email: '',
+    roles: [
+        {
+            _id: '',
+            role: ''
+        }
+    ],
+    accessToken: ''
+  };
 
   constructor(private _http: HttpClient, @Inject(PLATFORM_ID) private platformId: any) { 
     this.testBrowser = isPlatformBrowser(platformId);
-  }
-
-  getTest(): Observable<TestData> {
-    if(this.testBrowser) {
-      return this._http.get<TestData>('/api/test', {
-        headers: {
-          'Cache-Control' : 'no-cache'
-        }
-      })
-    } else { 
-      return new Observable<TestData>();
-    }
   }
 
   getPage(pageName: string) {
@@ -40,6 +42,14 @@ export class MenuService {
     } else { 
       return new Observable<PageData>();
     }
+  }
+
+  setUser(user: UserData) {
+    this.userData = user
+  }
+
+  getUser(): UserData {
+    return this.userData
   }
 
   getArticles() {
@@ -59,6 +69,29 @@ export class MenuService {
       return this._http.get<ArticleData>('/api/articles/' + id);
     } else {
       return new Observable<ArticleData>();
+    }
+  }
+
+  postComment(id: string, comment: CommentData) {
+    if(this.testBrowser) {
+      return this._http.post<Message>('/api/post/comment/' + id + '/?jwt=' + localStorage.getItem('access_token'), comment);
+    } else {
+      return new Observable<Message>();
+    }
+  }
+  isBlogger(): boolean {
+    if(this.userData.accessToken !== '') {
+      return this.userData.roles.map(roles=> roles.role).includes('admin') || this.userData.roles.map(roles=> roles.role).includes('blogger')
+    } else {
+      return false
+    }
+  }
+
+  postNewBlog(blog: ArticleData) {
+    if(this.testBrowser) {
+      return this._http.post<Message>('/api/post/articles/?jwt=' + localStorage.getItem('access_token') + '&id=' + localStorage.getItem('id'), blog);
+    } else {
+      return new Observable<Message>();
     }
   }
 }

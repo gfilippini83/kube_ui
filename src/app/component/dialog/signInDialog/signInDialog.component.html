@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Sign In</h1>
+<div mat-dialog-content>
+    <h2>Please sign in or create an account:</h2>
+    <mat-grid-list cols='2'>
+        <mat-grid-tile>
+            <button [routerLink]="['/signin']" mat-dialog-close mdbBtn type="button" color="success" outline="true" rounded="true" mdbWavesEffect>Sign In</button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button [routerLink]="['/signup']" mat-dialog-close mdbBtn type="button" color="success" outline="true" rounded="true" mdbWavesEffect>Sign Up</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

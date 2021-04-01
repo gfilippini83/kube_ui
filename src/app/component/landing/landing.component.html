@@ -41,12 +41,12 @@
     <mat-grid-tile
       colspan="3"
       rowspan="1"
-      style="background-color: lightpink;"
+      style="border-style: solid; border-color: lightgrey;"
       [routerLink]="['/article/', firstTile.data._id]">
-      <img [src]="firstTile.data.coverPhoto" style="width: 250px; height: 200px;">
+      <img [src]="firstTile.data.coverPhoto" style="width: 220px; height: 176px; object-fit: scale-down; text-align: center;">
       <div class="container">
         <h1 class="content-title">{{firstTile.data.title}}</h1><br>
-        <h4 class="content-footer">{{firstTile.data.author}} || {{firstTile.data.date}}</h4>
+        <h4 class="content-footer">{{firstTile.data.author}} || {{convertDate(firstTile.data.date)}}</h4>
       </div>
     </mat-grid-tile>
     <!-- Hot Articles -->
@@ -62,52 +62,14 @@
         *ngFor="let tile of tiles"
         colspan="3"
         rowspan="1"
-        style="background-color: lightpink;"
+        style="border-style: solid; border-color: lightgrey;"
         [routerLink]="['/article/', tile.data._id]">
-      <img [src]="tile.data.coverPhoto" style="width: 250px; height: 200px;">
+      <img [src]="tile.data.coverPhoto" style="width: 220px; height: 176px; object-fit: scale-down; text-align: center;">
       <div class="container">
         <h1 class="content-title">{{tile.data.title}}</h1><br>
-        <h4 class="content-footer">{{tile.data.author}} || {{tile.data.date}}</h4>
+        <h4 class="content-footer">{{tile.data.author}} || {{convertDate(tile.data.date)}}</h4>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- <mat-grid-list [gutterSize]="'40px'" [cols]="breakpoint" rowHeight="1:1" (window:resize)="onResize()">
-
-      <mat-grid-tile  *ngFor="let item of data">
-    
-        <mdb-card [routerLink]="['/article/', item._id]">
-          <!--Card image
-          <mdb-card-img [src]="item.coverPhoto" alt="Card image cap"></mdb-card-img>
-          <!--Card content
-          <mdb-card-body>
-        
-            <!--Title
-            <mdb-card-title>
-              <h4>{{item.title}}</h4>
-            </mdb-card-title>
-        
-            <!--Text
-            <mdb-card-text> {{(item.footer) ? shorten(item.footer) : 'I forget to put a footer, deal with it kid'}}
-            </mdb-card-text>
-            
-          </mdb-card-body>
-        </mdb-card>
-      </mat-grid-tile>
-
-    </mat-grid-list> -->
 </div>
 

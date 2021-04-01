@@ -2,16 +2,7 @@ import * as helpers from './util/helper';
 import * as express from 'express';
 
 export function routes (server: express.Express) {
-    server.get('/api/test', async (req, res) => {
-        try{
-            console.log("*** In api call ***")
-            var resp = await helpers.test();
-            console.log("*** completed helpers call ***")
-            res.send({message: "IN SERVER SIDE API --> " + resp })
-        } catch (error) {
-            console.log("IN ERROR BLOCK 1:", error)
-        }
-    })
+   
 
     server.get('/api/pages/:pageName', async (req, res) => {
         try{
@@ -47,14 +38,39 @@ export function routes (server: express.Express) {
             console.log("IN ERROR BLOCK 1:", error)
         }
     })
+    server.post('/api/post/comment/:id', async (req, res) => {
+        try{
+            const id = req.params.id;
+            const comment = req.body;
+            const jwt = <string> req.query.jwt;
+            console.log("*** In api call ***")
+            var resp = await helpers.postCommentOnArtcle(id, comment, jwt);
+            console.log("*** completed helpers call ***")
+            res.send(resp)
+        } catch (error) {
+            console.log("IN ERROR BLOCK 1:", error)
+        }
+    })
+    server.post('/api/post/articles/', async (req, res) => {
+        try{
+            const newBlog = req.body;
+            const jwt = <string> req.query.jwt;
+            const userId = <string> req.query.id;
+            console.log("*** In api call *** ID", userId)
+            var resp = await helpers.postNewBlog(newBlog, jwt, userId);
+            console.log("*** completed helpers call ***")
+            res.send(resp)
+        } catch (error) {
+            console.log("IN ERROR BLOCK 1:", error)
+        }
+    })
     server.get('/api/user/get/:id', async (req, res) => {
         try{
             const id = req.params.id
-            console.log(req)
             const jwt = <string> req.query.jwt
-            console.log("*** In api call ***")
+            // console.log("*** In api call ***")
             var resp = await helpers.getUserById(id, jwt);
-            console.log("*** completed helpers call ***")
+            // console.log("*** completed helpers call ***")
             res.send(resp)
         } catch (error) {
             console.log("IN ERROR BLOCK 1:", error)

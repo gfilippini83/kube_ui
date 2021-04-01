@@ -6,6 +6,7 @@ import * as e from 'express';
 
 import { Observable } from 'rxjs';
 import { LoginUser } from '../interfaces/loginUser';
+import { Message } from '../interfaces/message';
 import { RegisterUser } from '../interfaces/registerUser';
 import { UserData } from '../interfaces/userData';
 @Injectable({
@@ -16,16 +17,28 @@ export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   testBrowser: boolean;
+  userData: UserData = {
+    id: '',
+    username: '',
+    email: '',
+    roles: [
+        {
+            _id: '',
+            role: ''
+        }
+    ],
+    accessToken: ''
+  };
 
   constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: any, private router: Router,){
     this.testBrowser = isPlatformBrowser(platformId);
   }
 
-  register(user: RegisterUser): Observable<any> {
+  register(user: RegisterUser): Observable<Message> {
     if(this.testBrowser) {
-      return this.httpClient.post(`/api/auth/signup`, user)
+      return this.httpClient.post<Message>(`/api/auth/signup`, user)
     } else {
-      return new Observable<any>()
+      return new Observable<Message>()
     }
   }
 
@@ -46,7 +59,15 @@ export class AuthService {
       return false
     }
   }
+  setUser(user: UserData) {
+    this.userData = user;
+    console.log("THIS IS THE USERDATA:", this.userData)
+  }
 
+  authGuardGetUser(): UserData {
+    console.log("THIS IS THE USERDATA IN GET!!:", this.userData)
+    return this.userData;
+  }
   getUser(): Observable<UserData> {
     if(this.testBrowser) {
       return this.httpClient.get<UserData>('/api/user/get/' + localStorage.getItem('id') + '/?jwt=' + localStorage.getItem('access_token'))
