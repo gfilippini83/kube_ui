@@ -74,9 +74,10 @@ export class ArticleViewerComponent implements OnInit {
         }
         this.menuService.postComment(this.config._id, newComment).subscribe(resp => {
           if(resp.status === 'SUCCESS') {
-            this.config.comments.push(newComment)
+            this.config.comments.push(newComment);
+            this.comment = '';
             this.comments = this.config.comments.map(x => x);
-            this.comments.reverse()
+            this.comments.reverse();
           }
         })
       })

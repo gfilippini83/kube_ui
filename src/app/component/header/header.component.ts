@@ -65,6 +65,16 @@ export class HeaderComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
+    this.user = {
+      id: '',
+      username: '',
+      email: '',
+      roles: [{
+        _id: '',
+        role: ''
+      }],
+      accessToken: ''
+    };  
     this.menuService.setUser({
       id: '',
       username: '',
